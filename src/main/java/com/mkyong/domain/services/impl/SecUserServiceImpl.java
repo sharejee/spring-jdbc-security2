@@ -5,6 +5,7 @@ import com.mkyong.domain.repositories.SecUserRepository;
 import com.mkyong.domain.services.SecUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

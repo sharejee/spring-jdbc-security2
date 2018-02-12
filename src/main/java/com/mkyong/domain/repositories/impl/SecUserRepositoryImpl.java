@@ -2,11 +2,13 @@ package com.mkyong.domain.repositories.impl;
 
 import com.mkyong.domain.models.SecUser;
 import com.mkyong.domain.repositories.SecUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,21 +22,14 @@ Create Date: 2/12/2018
 @Repository
 @Qualifier("secUserRepository")
 public class SecUserRepositoryImpl implements SecUserRepository {
-
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
+    @Transactional
     public List<SecUser> getAllUsers() {
-        String sql = "select *from Employee";
+        String sql = "select *from users";
 
-        List<SecUser> employeeList = jdbcTemplate.query(sql, new ResultSetExtractor<List<SecUser>>() {
+        List<SecUser> secUsers = jdbcTemplate.query(sql, new ResultSetExtractor<List<SecUser>>() {
             public List<SecUser> extractData(ResultSet rs) throws SQLException, DataAccessException {
                 List<SecUser> list = new ArrayList<SecUser>();
                 while (rs.next()) {
@@ -49,7 +44,7 @@ public class SecUserRepositoryImpl implements SecUserRepository {
             }
 
         });
-        return employeeList;
+        return secUsers;
     }
 
     public SecUser getUserById(String username) {
