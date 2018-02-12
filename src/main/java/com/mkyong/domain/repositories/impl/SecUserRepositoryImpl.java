@@ -2,6 +2,7 @@ package com.mkyong.domain.repositories.impl;
 
 import com.mkyong.domain.models.SecUser;
 import com.mkyong.domain.repositories.SecUserRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -17,6 +18,7 @@ Create By: Ron Rith
 Create Date: 2/12/2018
 */
 @Repository
+@Qualifier("secUserRepository")
 public class SecUserRepositoryImpl implements SecUserRepository {
 
     private JdbcTemplate jdbcTemplate;
